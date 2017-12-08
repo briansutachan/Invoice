@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Nobile" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css?family=Macondo+Swash+Caps" rel="stylesheet">    
     <title>Invoice App</title>
     <style>
         body{
             margin: 10% 4% 4% 4%;
+            background-color: grey;
         }
         .userContainer{
             display: flex;
@@ -22,12 +23,14 @@
             flex-wrap: wrap;
             width:100%;
             height: auto;
+            background-color: lightgray;
         }
         .userProfile{
             border: 1px solid black;
             display: flex;
             width: 60%;
             height: 100%;
+            background-color: lightslategray;
         }
         .user{
             height: auto;
@@ -40,7 +43,7 @@
         #infoContainer{
             margin: 5% 2% 2% 2%;
             width: 60%;
-            font-family: Nobile;
+            font-family: 'Macondo Swash Caps', cursive;
 	        font-size: 16px;
         }
         p{
@@ -52,6 +55,8 @@
             height: 100%;
         }
         .invoice{
+            background-color: rgb(253, 253, 5);
+            color: red;
             border: 1px solid black;
             margin: 6% 3% 0% 3%;
             padding: 2%;
@@ -60,6 +65,7 @@
             
         }
         .invoice > p{
+            color: blue;
             position: relative;
             margin: 5px;
             left: 25%;
@@ -68,15 +74,40 @@
     </style>
 </head>
 <body>
-     
+     <div class="userContainer">
+        <!-- UserProfile -->
+        <div class="userProfile">
+         <!-- Inside of my UserProfile I need a picture container -->
+                <div class="user" id="picContainer">
+                <!-- place image here -->
+                <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/1-circuit-board-technology-seisiri-silapasuwanchai.jpg" alt="Circuit">
+            </div>
+                <!-- and a info container -->
+                <div class="user" id="infoContainer">
+                Name:
+                <p class="name"></p>
+                Company Name:
+                <p class="company_name"></p>
+                Address:
+                <p class="address"></p>
+                Email:
+                <p class="email"></p>
+                </div>
+            </div>
+     </div>
+
+     <div class="invoiceContainer">
+        <p class="title">Invoices</p>
+     </div>
+
     <script>
         //Fake it til you make it Database
         var user = {
-            name: ,
-            companyName: ,
-            address: ,
-            email: ,
-            picture: 
+            name: "Brian Sutachan",
+            companyName: "BS Tech",
+            address: "1770 NE" ,
+            email: "bsutachan@techlaunch.io",
+            picture: ""
         }
 
         var invoices = [
@@ -106,33 +137,64 @@
                 amount: 160,
                 cost: 414.00,
                 paid: 414.00
+            },
+            {
+                inv_id: "0152374",
+                companyName: user.companyName,
+                date: "10/10/2017",
+                order: "JBL Speakers",
+                amount: 25,
+                cost: 450.00,
+                paid: 400.00
+            },
+            {
+                inv_id: "1005674",
+                companyName: user.companyName,
+                date: "12/31/2016",
+                order: "Logitech Keyboards",
+                amount: 80,
+                cost: 1020.00,
+                paid: 450.00
+            },
+            {
+                inv_id: "1000055",
+                companyName: user.companyName,
+                date: "2/10/2017",
+                order: "Corsair Power Supplies",
+                amount: 40,
+                cost: 515.00,
+                paid: 515.00
             }
         
         ]
 
         
-        //element selectors
+        // element selectors
 
-        //adding invoices
+        // adding invoices
+        document.querySelector(`.name`).textContent = user.name
+        document.querySelector(`.company_name`).textContent = user.companyName
+        document.querySelector(`.address`).textContent = user.address
+        document.querySelector(`.email`).textContent = user.email
         for(var i=0; i<invoices.length; i++){
             document.querySelector('.invoiceContainer').innerHTML += `
             <div class="invoice" id=${invoices[i].inv_id}>
                 Invoice #:   <br/>    
-                <p>${} </p>
+                <p>${invoices[i].inv_id} </p>
                 Company Name:   <br /> 
-                <p>${} </p>
+                <p>${invoices[i].companyName} </p>
                 Date:  <br />
-                <p> ${} </p>
+                <p> ${invoices[i].date} </p>
                 Order:  <br />   
-                <p>${} </p>
+                <p>${invoices[i].order} </p>
                 Amount:   <br />     
-                <p>${} </p>
+                <p>${invoices[i].amount} </p>
                 Cost:       <br />    
-                <p>$${} </p>
+                <p>$${invoices[i].cost} </p>
                 Paid:       <br />   
-                <p> $${} </p>
+                <p> $${invoices[i].paid} </p>
                 Owed:        <br />   
-                <p>$${} </p>
+                <p>$${invoices[i].cost - invoices[i].paid} </p>
             </div>
             `
         }
